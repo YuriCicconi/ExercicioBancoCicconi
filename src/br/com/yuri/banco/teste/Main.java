@@ -34,6 +34,9 @@ public class Main {
         banco.adicionarConta(conta2);
         banco.adicionarConta(conta3);
 
+        String teste = banco.buscarConta(1);
+        System.out.println(teste);
+
         System.out.println(banco.lista());
     }
 }

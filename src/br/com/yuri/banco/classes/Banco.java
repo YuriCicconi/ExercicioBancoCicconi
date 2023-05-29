@@ -21,17 +21,12 @@ public class Banco {
         return this.contas;
     }
 
-    public Conta buscarConta(int numeroDaConta) {
-        try{
-            for (Conta conta : contas) {
+    public String buscarConta(int numeroDaConta) {
+        for (Conta conta : contas) {
                 if (conta.getNumero() == numeroDaConta) {
-                    return conta;
+                    return "" + conta;
                 }
             }
-        } catch (NullPointerException e) {
-            System.out.println("Não foi possível encontrar a conta");
-        }
-
-        return null;
+        return "Não foi possível encontrar a conta solicitada";
     }
 }
