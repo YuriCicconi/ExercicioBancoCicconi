@@ -4,6 +4,7 @@ import br.com.yuri.banco.classes.Banco;
 import br.com.yuri.banco.classes.Conta;
 import br.com.yuri.banco.classes.Titular;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -11,6 +12,7 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         boolean sair = false;
+        boolean novoMenu = false;
         Banco banco = new Banco();
 
         String menuDeOpcoes = """
@@ -35,6 +37,7 @@ public class Main {
                     Titular novoTitular = new Titular(nome, cpf);
                     Conta novaConta = new Conta(novoTitular);
                     banco.adicionarConta(novaConta);
+                    novoMenu = true;
                     sair = true;
                 }
                 case 2 -> sair = true;
@@ -44,7 +47,7 @@ public class Main {
 
 
 
-            menuDeOpcoes = """
+        menuDeOpcoes = """
                             ***********************************
                             Digite sua Opção
                             1- Abrir outra conta
@@ -58,13 +61,12 @@ public class Main {
                             """;
 
 //            System.out.println(banco.lista().get(1004).getTitular());
-        sair = false;
 
-        while (!sair){
-                System.out.println(menuDeOpcoes);
+        while (novoMenu){
+            System.out.println(menuDeOpcoes);
+            try {
                 System.out.println("Informe a operação desejada: ");
                 int operacao = sc.nextInt();
-
                 switch (operacao) {
                     case 1 -> {
                         System.out.println("Informe seu nome: ");
@@ -134,10 +136,15 @@ public class Main {
                         }
                     }
                     case 7 -> {
-                        sair = true;
+                        novoMenu = false;
                     }
                     default -> System.out.println("Opção inválida, selecione uma opção existente.");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Opção inválida, o programa será encerrado!");
+                novoMenu = false;
+            }
+
         }
         System.out.println(banco.lista());
 
