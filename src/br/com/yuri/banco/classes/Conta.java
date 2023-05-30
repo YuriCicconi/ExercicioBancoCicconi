@@ -27,18 +27,23 @@ public class Conta extends Banco {
     }
 
     public void depositar(double valor) {
-        if (valor > 0) {
-            this.saldo += valor;
-        } else {
-            System.out.println("Valor para depósito inválido");
-        }
+            if (valor > 0) {
+                this.saldo += valor;
+            } else {
+                System.out.println("Valor para depósito inválido");
+            }
+
     }
 
     public void sacar(double valor) {
-        if(valor <= this.saldo) {
-            this.saldo -= valor;
+        if (valor > 0) {
+            if(valor <= this.saldo) {
+                this.saldo -= valor;
+            } else {
+                System.out.println("Saldo insuficiente");
+            }
         } else {
-            System.out.println("Saldo insuficiente");
+            System.out.println("Valor inválido, por favor, informe um valor positivo!");
         }
     }
 
